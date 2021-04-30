@@ -1,0 +1,20 @@
+{
+  "name": "set-frame-out",
+  "version": "0.0.1",
+  "description": "Like setTimeout but with frames",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PierBover/set-frame-out.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PierBover/set-frame-out/issues"
+  },
+  "homepage": "https://github.com/PierBover/set-frame-out#readme"
+}
