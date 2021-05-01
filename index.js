@@ -7,10 +7,10 @@ function checkCallbacks () {
 	let allNull = true;
 
 	for (var i = 0; i < callbacks.length; i++) {
-		if (callbacks[i] === null) continue;
+		if (!callbacks[i]) continue;
 
 		if (callbacks[i].targetFrame === currentFrame) {
-			callbacks[i]();
+			callbacks[i].callback();
 			callbacks[i] = null;
 		} else {
 			allNull = false;
@@ -18,28 +18,29 @@ function checkCallbacks () {
 	}
 
 	// If no pending callbacks reset everything
-	if (allNull) reset();
-	else window.requestAnimationFrame(checkCallbacks);
-}
-
-function reset () {
-	callbacks = [];
-	currentFrame = 0;
+	if (allNull) {
+		callbacks.splice(0, callbacks.length);
+		currentFrame = 0;
+	} else {
+		window.requestAnimationFrame(checkCallbacks);
+	}
 }
 
 export function setFrameout (callback, frames) {
-	const length = callbacks.push({
+	console.log(callbacks);
+
+	callbacks.push({
 		targetFrame: currentFrame + frames,
 		callback
 	});
 
 	// Only do this on the first added callback
-	if (length === 1) window.requestAnimationFrame(checkCallbacks);
+	if (currentFrame === 0) window.requestAnimationFrame(checkCallbacks);
 
 	// return index for clearFrameout()
-	return length - 1;
+	return callbacks.length - 1;
 }
 
 export function clearFrameout (index) {
-	callbacks[index] = null;
+	if (callbacks[index]) callbacks[index] = null;
 }
