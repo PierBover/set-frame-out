@@ -27,18 +27,16 @@ function checkCallbacks () {
 }
 
 export function setFrameout (callback, frames) {
-	console.log(callbacks);
-
-	callbacks.push({
+	const length = callbacks.push({
 		targetFrame: currentFrame + frames,
 		callback
 	});
 
 	// Only do this on the first added callback
-	if (currentFrame === 0) window.requestAnimationFrame(checkCallbacks);
+	if (length === 1) window.requestAnimationFrame(checkCallbacks);
 
 	// return index for clearFrameout()
-	return callbacks.length - 1;
+	return length - 1;
 }
 
 export function clearFrameout (index) {
