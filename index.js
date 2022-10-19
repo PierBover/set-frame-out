@@ -54,6 +54,6 @@ export function setFrameout (callback, frames) {
 }
 
 export function clearFrameout (index) {
-	const arrayIndex = callbacks.findIndex((item) => item.index === index);
+	const arrayIndex = callbacks.findIndex((item) => item && item.index === index);
 	if (arrayIndex >= 0) callbacks[arrayIndex] = null;
 }
